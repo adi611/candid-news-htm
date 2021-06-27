@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Candid News</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        
+        html{
+            height: 100%;
+        }
+        body{
+            /* background-image: linear-gradient(#F0D9E7,#FF94CC); */
+            background: #edc0bf;
+            background: linear-gradient(90deg, #edc0bf 0,#c4caef 58%);
+            height: 100%;
+            
+        }
+        
+        .index,h1{
+            text-align: center;
+            padding: 20px;
+        }
+        .name{
+            margin-bottom: 150px;
+        }
+        input{
+            width: 50%;
+            border-color: rgba(19, 163, 163, 0.7);
+            border-radius: 0.5rem;
+            border-width: 0.1px;
+            background: rgba(255, 255, 255, .3);
+            box-shadow: .1px .1px 5px rgb(54, 207, 245);
+        }
+        .card {
+          width: 85vw;
+          height: auto;
+          margin-top: 10px;
+          padding: 2rem;
+          background: rgba(255, 255, 255, .5);
+          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1), 0 4px 20px 0 rgba(0, 0, 0, 0.09);
+          border-radius: 1rem;
+          transition: transform .2s;
+        }
+        .card:hover{
+            transform: scale(1.03);
+        }
+        .shape {
+          position: absolute;
+          width: 150px;
+          top: .5rem;
+          left: .5rem;
+        }
+        .index{
+            color:rgba(15, 124, 124, 0.7);
+            
+        }
+        .title{
+            /* font-family: 'Cormorant Garamond', serif; */
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            text-shadow: 2px 2px 5px rgb(54, 207, 245);
+        }
+        .feeds{
+            width: 85vw;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            margin-top: 5px;
+            background: rgba(255, 255, 255, .5);
+          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1), 0 4px 20px 0 rgba(0, 0, 0, 0.09);
+          border-radius: 1rem;
+
+        }
+        .newsFeeds{
+            font-weight: 800;
+            font-style: italic;
+        }
+        .newsCardContainer{
+            margin: 5px;
+            width:320px;
+            height:400px;
+            border: 1px solid gray;
+            border-radius: 10px;
+            margin-left: 10px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+
+        }
+        .newsImageContainer{
+flex: 1;
+/* border: 1px solid gray; */
+border-radius: 10px;
+        }
+        .Image{
+            object-fit: cover;
+            border-radius: 10px;
+            width: 100%;
+            height: 250px;
+        }
+        .feedsContainer{
+            display: flex;
+            flex-direction: row;
+            /* flex-wrap: wrap; */
+            overflow-x: scroll;
+            overflow-y: hidden;
+            align-items: flex-start;
+            justify-content: space-between;           
+        }
+        .newsDescription{
+            font-size: smaller;
+            text-overflow: inherit;
+            white-space: nowrap;
+            overflow: hidden;
+            /* border: 1px solid red; */
+            flex: 1;
+        }
+        .anchorTag{
+            text-decoration: none;
+            color: black;
+        }
+        .newsTitle{
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div class="card index container-fluid">
+        <p class="h2 title">Candid News</p>
+        <p class="h7 ">A fake-news classifier.</p><br>
+        <form action="/verify" method="POST">
+            <input type="text" class="input" placeholder="Enter news headline:" name="newstitle"><br><br>
+            <button class="btn btn-outline-info" type="submit">Classify</button>
+        </form>
+    </div>
+<div class="feeds">
+        <h1 class="newsFeeds">News Feeds</h1>
+        <div class="feedsContainer">
+            <% articles.forEach((article)=>{ %>
+                <a href=<%=article.url%> class="anchorTag">
+                    <div class="newsCardContainer">
+                        <div class="newsImageContainer">
+                            <img src=<%=article.urlToImage%> class="Image"/>
+                        </div>
+                        <h5 class="newsTitle"><%=article.title%></h5>
+                        <div class="newsDescription"><%=article.description%></div>
+                    </div>
+                </a>
+                <% }) %>
+        </div>
+       
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
